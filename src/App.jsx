@@ -1,9 +1,10 @@
-import React, { useState } from 'react';
-import { MapContainer, TileLayer, FeatureGroup } from 'react-leaflet';
+import { useState } from 'react';
+import { FeatureGroup, MapContainer, TileLayer } from 'react-leaflet';
+import './App.css';
 import { EditControl } from 'react-leaflet-draw';
 
-export const Map = () => {
-    const center = [-23.572218119099436, -46.632395960507004];
+function App() {
+  const center = [-23.572218119099436, -46.632395960507004];
     const [mapLayers, setMapLayers] = useState([]);
 
     const _onCreated = (e) => {
@@ -41,7 +42,8 @@ export const Map = () => {
     };
 
   return (
-    <div id='map'>
+    <div className='App'>
+      <div className='map-container'>
         <MapContainer 
             style={{height: '100vh', width: '70vw'}} 
             center={center}
@@ -67,11 +69,16 @@ export const Map = () => {
             <TileLayer 
                 attribution='&copy; <a href="https://www.openstreetmap.org/copyright">OpenStreetMap</a> contributors'
                 url="https://{s}.tile.openstreetmap.org/{z}/{x}/{y}.png"
-            />
-            
+            />           
         </MapContainer>
-
-        <p>{JSON.stringify(mapLayers, 0, 2)}</p>
+      </div>
+      <div className='panel-container'>
+        <pre>
+          {JSON.stringify(mapLayers, 0, 2)}
+        </pre>
+      </div>
     </div>
-  )
+  );
 }
+
+export default App;
