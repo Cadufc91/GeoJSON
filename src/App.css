@@ -1,1 +1,8 @@
+.App {
+  display: flex;
+  overflow: hidden;
+}
 
+.panel-container {
+  padding: 15px;
+}
