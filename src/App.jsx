@@ -1,12 +1,18 @@
 import { useState } from 'react';
-import { FeatureGroup, MapContainer, TileLayer } from 'react-leaflet';
+import { FeatureGroup, MapContainer, TileLayer  } from 'react-leaflet';
 import './App.css';
 import { EditControl } from 'react-leaflet-draw';
+import MapSearch from './components/MapSearch';
+
+
 
 function App() {
   const center = [-23.572218119099436, -46.632395960507004];
     const [mapLayers, setMapLayers] = useState([]);
 
+    
+
+    
     const _onCreated = (e) => {
         console.log(e);
 
@@ -41,6 +47,7 @@ function App() {
         });
     };
 
+    
   return (
     <div className='App'>
       <div className='map-container'>
@@ -64,17 +71,18 @@ function App() {
                         marker: false,
                     }}
                 />
+              
             </FeatureGroup>
-
             <TileLayer 
                 attribution='&copy; <a href="https://www.openstreetmap.org/copyright">OpenStreetMap</a> contributors'
                 url="https://{s}.tile.openstreetmap.org/{z}/{x}/{y}.png"
-            />           
+            />       
+          <MapSearch />
         </MapContainer>
       </div>
       <div className='panel-container'>
         <pre>
-          {JSON.stringify(mapLayers, 0, 2)}
+          Nome:{JSON.stringify(mapLayers, 0, 2)}
         </pre>
       </div>
     </div>
