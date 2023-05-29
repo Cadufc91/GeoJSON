@@ -1,12 +1,17 @@
 import { useState } from 'react';
-import { FeatureGroup, MapContainer, TileLayer } from 'react-leaflet';
+import { FeatureGroup, LayersControl, MapContainer, TileLayer  } from 'react-leaflet';
 import './App.css';
 import { EditControl } from 'react-leaflet-draw';
+import MapSearch from './components/MapSearch';
+import { WMSTileLayer } from 'react-leaflet/WMSTileLayer';
 
 function App() {
   const center = [-23.572218119099436, -46.632395960507004];
     const [mapLayers, setMapLayers] = useState([]);
 
+    
+
+    
     const _onCreated = (e) => {
         console.log(e);
 
@@ -41,6 +46,7 @@ function App() {
         });
     };
 
+    
   return (
     <div className='App'>
       <div className='map-container'>
@@ -48,7 +54,7 @@ function App() {
             style={{height: '100vh', width: '70vw'}} 
             center={center}
             zoom={10}
-            scrollWheelZoom={false}
+            scrollWheelZoom={true}
         >
             <FeatureGroup>
                 <EditControl
@@ -64,12 +70,35 @@ function App() {
                         marker: false,
                     }}
                 />
+              
             </FeatureGroup>
-
-            <TileLayer 
-                attribution='&copy; <a href="https://www.openstreetmap.org/copyright">OpenStreetMap</a> contributors'
-                url="https://{s}.tile.openstreetmap.org/{z}/{x}/{y}.png"
-            />           
+            <LayersControl>
+              <LayersControl.BaseLayer name="Street View" checked>
+                <TileLayer 
+                    attribution='&copy; <a href="https://www.openstreetmap.org/copyright">OpenStreetMap</a> contributors'
+                    url="https://{s}.tile.openstreetmap.org/{z}/{x}/{y}.png"
+                />
+              </LayersControl.BaseLayer>
+              <LayersControl.BaseLayer name="Topografia">
+                <WMSTileLayer
+                  layers="TOPO-WMS"
+                  url="http://ows.mundialis.de/services/service?"
+                />   
+              </LayersControl.BaseLayer>
+              <LayersControl.BaseLayer name="Lugares">
+                <WMSTileLayer
+                  layers="OSM-Overlay-WMS"
+                  url="http://ows.mundialis.de/services/service?"
+                />
+              </LayersControl.BaseLayer>
+              <LayersControl.BaseLayer name="Topografia + Lugares">
+                <WMSTileLayer
+                  layers="TOPO-WMS,OSM-Overlay-WMS"
+                  url="http://ows.mundialis.de/services/service?"
+                />
+              </LayersControl.BaseLayer>
+            </LayersControl>
+          <MapSearch />
         </MapContainer>
       </div>
       <div className='panel-container'>
