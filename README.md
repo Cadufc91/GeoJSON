@@ -41,7 +41,7 @@ GeoJSON - é um projeto criado para aprendizado e treinamento de desenvolvimento
 
 ## ⚙️ Funcionalidades
 
-- [x] Mapa com localização central/inicial em São Paulo - Brazil:
+- [x] Mapa com localização central/inicial em São Paulo - Brasil.
 - [x] Ferramenta para desenho de polígono no mapa
 - [x] Ferramenta de edição de desenho de polígono no mapa
 - [x] Ferramenta com retorno de coordenadas do desenho criado no mapa
